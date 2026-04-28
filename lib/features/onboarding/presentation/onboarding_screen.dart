@@ -143,55 +143,77 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
       children: [
         Text(
           'Selamat Datang!',
-          style: AppTypography.displayLarge,
+          style: AppTypography.displayLarge.copyWith(
+            color: AppColors.textOnPrimary,
+            fontSize: 40,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: AppSpacing.xs),
         Text(
           'Mulai cara baru kelola ternak dengan\nlebih mudah dan teratur.',
-          style: AppTypography.subtitleOnPrimary,
+          style: AppTypography.subtitleOnPrimary.copyWith(
+            color: AppColors.textOnPrimary.withValues(alpha: 0.9),
+            fontSize: 15,
+            height: 1.5,
+          ),
         ),
       ],
     );
   }
 
   Widget _buildHeroImage() {
-    return SizedBox(
-      width: double.infinity,
-      child: Image.asset(
-        AppConstants.onboardingHero,
-        fit: BoxFit.fitWidth,
-        alignment: Alignment.bottomCenter,
-        errorBuilder: (context, error, stackTrace) {
-          return Padding(
-            padding: const EdgeInsets.all(AppSpacing.xl),
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.primaryDark.withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(AppRadius.lg),
-              ),
-              padding: const EdgeInsets.all(AppSpacing.xl),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.broken_image_outlined,
-                    size: 80,
-                    color: AppColors.creamMuted.withValues(alpha: 0.7),
+    // ClipRect: biar gambar yang di-translate ke bawah gak overlow ke
+    // widget tetangga (button "Mulai Sekarang") di bawahnya.
+    return ClipRect(
+      child: SizedBox(
+        width: double.infinity,
+        child: Transform.translate(
+          // ⚠️ ADJUST POSISI GAMBAR DI SINI ⚠️
+          // Offset(x, y):
+          //   y > 0 → geser ke BAWAH (mepetin ke bawah)
+          //   y < 0 → geser ke ATAS
+          //   x > 0 → geser ke KANAN
+          //   x < 0 → geser ke KIRI
+          // Naikin angka 30 jadi 40, 50 dst kalau mau lebih turun
+          offset: const Offset(0, 40),
+          child: Image.asset(
+            AppConstants.onboardingHero,
+            fit: BoxFit.contain,
+            alignment: Alignment.bottomCenter,
+            errorBuilder: (context, error, stackTrace) {
+              return Padding(
+                padding: const EdgeInsets.all(AppSpacing.xl),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryDark.withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(AppRadius.lg),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
-                  Text(
-                    'Asset onboarding_hero.png tidak ditemukan',
-                    textAlign: TextAlign.center,
-                    style: AppTypography.bodySmall.copyWith(
-                      color: AppColors.creamMuted,
-                    ),
+                  padding: const EdgeInsets.all(AppSpacing.xl),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.broken_image_outlined,
+                        size: 80,
+                        color: AppColors.creamMuted.withValues(alpha: 0.7),
+                      ),
+                      const SizedBox(height: AppSpacing.sm),
+                      Text(
+                        'Asset onboarding_hero.png tidak ditemukan',
+                        textAlign: TextAlign.center,
+                        style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.creamMuted,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          );
-        },
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

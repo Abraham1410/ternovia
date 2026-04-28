@@ -9,6 +9,19 @@ import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../shared/widgets/ternovia_logo.dart';
 
+/// PilihPeranScreen — user pilih role Peternak atau Petugas Lapangan.
+///
+/// FIX v3:
+/// - Background image pake Align+FractionallySizedBox biar gak ke-crop aneh.
+///   Image di-position di bottom, ukurannya 60% dari tinggi screen.
+/// - Back button pake context.go('/onboarding'), bukan context.pop(),
+///   karena navigation dari onboarding pake go (replace stack).
+///
+/// FIX v4:
+/// - Icon role card sekarang support asset PNG via [iconAsset].
+///   Peternak pake assets/icons/peternak.png
+///   Petugas pake assets/icons/petugas.png
+///   Fallback ke Material Icon kalau asset gak ada.
 class PilihPeranScreen extends ConsumerWidget {
   const PilihPeranScreen({super.key});
 
@@ -175,7 +188,10 @@ class PilihPeranScreen extends ConsumerWidget {
           ),
           const SizedBox(height: AppSpacing.lg),
           _RoleCard(
+            // Icon Material sebagai fallback (kalau asset gagal load)
             icon: Icons.person_outline,
+            // Asset PNG yang sebenernya dipake
+            iconAsset: 'assets/icons/peternak.png',
             title: 'Masuk sebagai',
             titleBold: 'Peternak',
             onTap: () => _handleSelectRole(context, UserRole.peternak),
@@ -183,6 +199,7 @@ class PilihPeranScreen extends ConsumerWidget {
           const SizedBox(height: AppSpacing.md),
           _RoleCard(
             icon: Icons.badge_outlined,
+            iconAsset: 'assets/icons/petugas.png',
             title: 'Masuk sebagai',
             titleBold: 'Petugas Lapangan',
             onTap: () =>
@@ -196,6 +213,11 @@ class PilihPeranScreen extends ConsumerWidget {
 
 class _RoleCard extends StatelessWidget {
   final IconData icon;
+
+  /// Optional asset path. Kalau ada, akan dipakai instead of [icon].
+  /// Asset di-tint pakai AppColors.textDark biar match style.
+  final String? iconAsset;
+
   final String title;
   final String titleBold;
   final VoidCallback onTap;
@@ -205,6 +227,7 @@ class _RoleCard extends StatelessWidget {
     required this.title,
     required this.titleBold,
     required this.onTap,
+    this.iconAsset,
   });
 
   @override
@@ -235,11 +258,28 @@ class _RoleCard extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Icon(
-                    icon,
-                    size: 36,
-                    color: AppColors.textDark,
-                  ),
+                  // Render asset PNG kalau ada, fallback ke Material Icon
+                  if (iconAsset != null)
+                    SizedBox(
+                      width: 36,
+                      height: 36,
+                      child: Image.asset(
+                        iconAsset!,
+                        color: AppColors.textDark,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, __, ___) => Icon(
+                          icon,
+                          size: 36,
+                          color: AppColors.textDark,
+                        ),
+                      ),
+                    )
+                  else
+                    Icon(
+                      icon,
+                      size: 36,
+                      color: AppColors.textDark,
+                    ),
                   const SizedBox(height: AppSpacing.xs),
                   RichText(
                     textAlign: TextAlign.center,

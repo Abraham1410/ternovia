@@ -15,6 +15,12 @@ import '../providers/skt_form_state.dart';
 import '../widgets/skt_step_indicator.dart';
 import 'skt_form_steps.dart';
 
+/// SKT Form Screen — orchestrator untuk 5 step:
+/// 1. Data Kelompok
+/// 2. Data Ketua
+/// 3. Data Ternak
+/// 4. Dokumen Pendukung
+/// 5. Konfirmasi Pengajuan
 class SktFormScreen extends ConsumerWidget {
   const SktFormScreen({super.key});
 

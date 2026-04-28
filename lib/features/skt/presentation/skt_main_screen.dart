@@ -15,6 +15,7 @@ import '../providers/skt_form_provider.dart';
 import '../providers/skt_form_state.dart';
 import '../widgets/guide_sections_view.dart';
 
+/// Main screen Pengajuan SKT — button mulai, draft list, riwayat, panduan.
 class SktMainScreen extends ConsumerWidget {
   const SktMainScreen({super.key});
 

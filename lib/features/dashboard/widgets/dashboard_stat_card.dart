@@ -87,15 +87,14 @@ class DashboardStatCard extends StatelessWidget {
               color: overlayColor.withValues(alpha: 0.6),
             ),
           ),
-          // Compact padding — 12px all sides
+          // Layer 3: Icon + text content (mepet ke kiri-atas card)
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 12, 18),
+            padding: const EdgeInsets.fromLTRB(28, 15, 20, 12),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildIconContainer(),
                 const SizedBox(width: AppSpacing.sm),
-                // Title + subtitle column (kiri)
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,23 +102,21 @@ class DashboardStatCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        // Title 17 → 18 (sedikit lebih besar match Figma)
                         style: AppTypography.headingMedium.copyWith(
                           color: AppColors.white,
                           fontWeight: FontWeight.w700,
-                          fontSize: 15,
-                          height: 1.2,
+                          fontSize: 20,
+                          height: 1.4,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 4),
                       Text(
                         subtitle,
-                        // Subtitle 11 → 13 (naik biar lebih kebaca)
                         style: AppTypography.bodySmall.copyWith(
                           color: AppColors.white.withValues(alpha: 0.95),
-                          fontSize: 15,
+                          fontSize: 13,
                           height: 1.3,
                         ),
                         maxLines: 2,
@@ -128,12 +125,17 @@ class DashboardStatCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Gap antara text column dan CTA pill
-                const SizedBox(width: AppSpacing.sm),
-                // CTA pill di kanan, vertical center (Figma layout)
-                _buildCta(),
+                // Reserve space buat CTA biar text gak ke-overlap
+                const SizedBox(width: 60),
               ],
             ),
+          ),
+          // Layer 4: CTA mepet ke pojok kanan-bawah CARD
+          // (langsung child dari OUTER Stack — bukan nested di Padding)
+          Positioned(
+            right: AppSpacing.sm,
+            bottom: AppSpacing.sm,
+            child: _buildCta(),
           ),
         ],
         ),
@@ -142,9 +144,16 @@ class DashboardStatCard extends StatelessWidget {
   }
 
   Widget _buildIconContainer() {
-    // Icon tanpa box background — langsung render 40x40 sesuai Figma.
-    // Icon PNG-nya full-bleed mengisi slot.
-    return SizedBox(
+  // Icon tanpa box background — langsung render 40x40 sesuai Figma.
+  // Icon PNG-nya full-bleed mengisi slot.
+  return Padding(
+    padding: const EdgeInsets.only(
+      top: 11,
+      bottom: 0,
+      left: 0,
+      right: 5,
+    ),
+    child: SizedBox(
       width: 40,
       height: 40,
       child: iconAsset != null
@@ -157,9 +166,9 @@ class DashboardStatCard extends StatelessWidget {
               },
             )
           : Icon(fallbackIcon, color: AppColors.white, size: 32),
-    );
-  }
-
+    ),
+  );
+}
   Widget _buildCta() {
     // Default Figma: cream bg + brown text. User bisa override pake
     // ctaBackgroundColor / ctaTextColor kalo butuh.
@@ -174,7 +183,7 @@ class DashboardStatCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.sm + 2,
-            vertical: 7,
+            vertical: 3,
           ),
           decoration: BoxDecoration(
             color: bgColor,
@@ -192,7 +201,7 @@ class DashboardStatCard extends StatelessWidget {
             style: AppTypography.labelMedium.copyWith(
               color: fgColor,
               fontWeight: FontWeight.w700,
-              fontSize: 12,
+              fontSize: 11,
             ),
           ),
         ),

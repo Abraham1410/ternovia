@@ -6,6 +6,13 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
 
+/// LayananScreen — menu layanan Peternak.
+///
+/// Layout sesuai Figma (tanpa overlap card):
+/// - Top brown section: title "Layanan" + search bar
+/// - Gap normal
+/// - 3 layanan cards (SKT, Konfirmasi Bantuan, Sample Pakan)
+/// - Riwayat Pengajuan Terakhir + Riwayat SKT
 class LayananScreen extends ConsumerStatefulWidget {
   const LayananScreen({super.key});
 
@@ -48,7 +55,7 @@ class _LayananScreenState extends ConsumerState<LayananScreen> {
                     title: 'Riwayat Pengajuan Terakhir',
                     items: [
                       const _RiwayatItem(
-                        jenis: 'Pengajuan Sampel Pakan',
+                        jenis: 'Pengajuan Sample Pakan',
                         detail: 'Pakan konsentrat sapi perah',
                         detailIcon: Icons.grain,
                         tanggal: '02 Januari 2026',
@@ -186,7 +193,7 @@ class _LayananScreenState extends ConsumerState<LayananScreen> {
         _LayananCard(
           icon: Icons.science_outlined, // fallback
           iconAsset: 'assets/icons/sampel_pakan.png',
-          title: 'Pengajuan Sampel Pakan',
+          title: 'Pengajuan Sample Pakan',
           subtitle: 'Cek kualitas pakan',
           onTap: () {},
         ),

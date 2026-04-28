@@ -10,6 +10,8 @@ import '../widgets/dashboard_stat_card.dart';
 import '../widgets/kelompok_card.dart';
 import '../widgets/produksi_card.dart';
 
+/// DashboardScreen — home beranda Peternak (Ketua Kelompok).
+/// Layout compact sesuai Figma — padding tight, card height minimal.
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
 
@@ -57,7 +59,7 @@ class DashboardScreen extends ConsumerWidget {
                       ctaLabel: 'Lihat Grafik',
                       overlayColor: AppColors.cardSehat,
                       backgroundImage: AppConstants.cardSehatTidak,
-                      imageAlignment: Alignment.centerLeft,
+                      imageAlignment: const Alignment(1.0, 0.3),
                       imageScale: 1.5,
                       iconAsset: AppConstants.iconLoveSehat,
                       fallbackIcon: Icons.favorite_rounded,
@@ -148,7 +150,7 @@ class DashboardScreen extends ConsumerWidget {
               children: [
                 Row(
                   children: [
-                    const Text('🎉', style: TextStyle(fontSize: 27)),
+                    const Text('🎉', style: TextStyle(fontSize: 22)),
                     const SizedBox(width: AppSpacing.xs),
                     Flexible(
                       child: Text(

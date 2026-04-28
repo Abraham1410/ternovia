@@ -596,7 +596,7 @@ class _Step3DataKetuaState extends ConsumerState<_Step3DataKetua> {
         ),
         const SizedBox(height: AppSpacing.xxs),
         Text(
-          'Opsional',
+          '',
           style: AppTypography.bodySmall.copyWith(
             color: AppColors.textMuted,
             fontSize: 11,

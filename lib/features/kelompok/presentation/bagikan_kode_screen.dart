@@ -9,6 +9,17 @@ import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../shared/widgets/sand_app_bar.dart';
 
+/// Undang Anggota screen — match Figma (Undang_Anggota.png).
+///
+/// Layout (top to bottom):
+/// - AppBar coklat "Undang Anggota" dengan back button
+/// - Info panel kuning cream
+/// - Ilustrasi bulet petani + sapi (undangan.png)
+/// - Card "Kode Kelompok" cream dengan kode + icon copy
+/// - Button coklat "Bagikan Kode Kelompok"
+/// - Section "Cara Bergabung" dengan 3 step + arrow
+/// - Info panel hijau shield
+/// - Button outlined "Selesai"
 class BagikanKodeScreen extends StatelessWidget {
   final String kode;
 
