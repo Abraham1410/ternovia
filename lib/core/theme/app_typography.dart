@@ -1,102 +1,116 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'app_colors.dart';
 
-/// Typography system berdasarkan design Figma Ternovia
-/// Font utama: Poppins (fallback ke Google Fonts bila asset belum ada)
 class AppTypography {
   AppTypography._();
 
-  static TextStyle get _base => GoogleFonts.poppins(
-        color: AppColors.textPrimary,
-        height: 1.4,
-      );
+  static TextStyle _poppins({
+    double? fontSize,
+    FontWeight? fontWeight,
+    Color? color,
+    double? height,
+    double? letterSpacing,
+  }) {
+    return GoogleFonts.poppins(
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color,
+      height: height,
+      letterSpacing: letterSpacing,
+    );
+  }
 
-  // Display — untuk heading besar seperti "Selamat Datang!"
-  static TextStyle displayLarge = _base.copyWith(
+  static TextStyle displayLarge = _poppins(
     fontSize: 32,
     fontWeight: FontWeight.w700,
+    color: AppColors.textOnPrimary,
     height: 1.2,
   );
 
-  static TextStyle displayMedium = _base.copyWith(
+  static TextStyle displayMedium = _poppins(
     fontSize: 28,
     fontWeight: FontWeight.w700,
+    color: AppColors.textDark,
     height: 1.25,
   );
 
-  static TextStyle displaySmall = _base.copyWith(
-    fontSize: 24,
+  static TextStyle headingXL = _poppins(
+    fontSize: 28,
+    fontWeight: FontWeight.w800,
+    color: AppColors.primary,
+    letterSpacing: 2.0,
+  );
+
+  static TextStyle headingLarge = _poppins(
+    fontSize: 22,
     fontWeight: FontWeight.w700,
+    color: AppColors.textDark,
     height: 1.3,
   );
 
-  // Heading — section title seperti "Produksi Hari Ini", "Dashboard"
-  static TextStyle headingLarge = _base.copyWith(
-    fontSize: 22,
-    fontWeight: FontWeight.w600,
-  );
-
-  static TextStyle headingMedium = _base.copyWith(
+  static TextStyle headingMedium = _poppins(
     fontSize: 18,
     fontWeight: FontWeight.w600,
+    color: AppColors.textDark,
   );
 
-  static TextStyle headingSmall = _base.copyWith(
+  static TextStyle headingSmall = _poppins(
     fontSize: 16,
     fontWeight: FontWeight.w600,
+    color: AppColors.textDark,
   );
 
-  // Body
-  static TextStyle bodyLarge = _base.copyWith(
+  static TextStyle bodyLarge = _poppins(
     fontSize: 16,
     fontWeight: FontWeight.w400,
+    color: AppColors.textDark,
+    height: 1.5,
   );
 
-  static TextStyle bodyMedium = _base.copyWith(
+  static TextStyle bodyMedium = _poppins(
     fontSize: 14,
     fontWeight: FontWeight.w400,
+    color: AppColors.textDark,
+    height: 1.5,
   );
 
-  static TextStyle bodySmall = _base.copyWith(
+  static TextStyle bodySmall = _poppins(
     fontSize: 12,
     fontWeight: FontWeight.w400,
+    color: AppColors.textMuted,
+    height: 1.4,
   );
 
-  // Label
-  static TextStyle labelLarge = _base.copyWith(
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-  );
-
-  static TextStyle labelMedium = _base.copyWith(
-    fontSize: 12,
-    fontWeight: FontWeight.w500,
-  );
-
-  static TextStyle labelSmall = _base.copyWith(
-    fontSize: 10,
-    fontWeight: FontWeight.w500,
-  );
-
-  // Button
-  static TextStyle buttonLarge = _base.copyWith(
+  static TextStyle labelLarge = _poppins(
     fontSize: 16,
     fontWeight: FontWeight.w600,
+    color: AppColors.textDark,
+  );
+
+  static TextStyle labelMedium = _poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textDark,
+  );
+
+  static TextStyle labelSmall = _poppins(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textMuted,
+  );
+
+  static TextStyle captionOnPrimary = _poppins(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
     color: AppColors.textOnPrimary,
   );
 
-  static TextStyle buttonMedium = _base.copyWith(
+  static TextStyle subtitleOnPrimary = _poppins(
     fontSize: 14,
-    fontWeight: FontWeight.w600,
-    color: AppColors.textOnPrimary,
-  );
-
-  // Special — logo text "TERNOVIA"
-  static TextStyle logoText = _base.copyWith(
-    fontSize: 28,
-    fontWeight: FontWeight.w700,
-    color: AppColors.primary,
-    letterSpacing: 2,
+    fontWeight: FontWeight.w400,
+    color: AppColors.creamMuted,
+    height: 1.5,
   );
 }
